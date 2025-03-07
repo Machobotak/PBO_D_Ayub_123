@@ -17,7 +17,7 @@ class loginmahasiswa {
             System.out.println("Masukkan password: ");
             String password = objinput.nextLine();
 
-            String nimakhir = "069";
+            String nimakhir = "123";
             String validusername = "Admin" + nimakhir;
             String validpassword = "Password" + nimakhir;
 
@@ -36,10 +36,10 @@ class loginmahasiswa {
             String namaberhasil = "Muhammad Ibrahim Al Ayubi";
             String nimberhasil = "202410370110123";
 
-            if (nama.equals(namaberhasil) && nim.equals(nimberhasil)) {
+            if (nama.equalsIgnoreCase(namaberhasil) && nim.equalsIgnoreCase(nimberhasil)) {
                 System.out.println("Login Mahasiswa Berhasil.");
-                System.out.println("Nama:"+ nama);
-                System.out.println("NIM:"+ nim);
+                System.out.println("Nama:"+ namaberhasil);
+                System.out.println("NIM:"+ nimberhasil);
             }else{
                 System.out.println("Login gagal! Nama atau NIM salah!");
             }
