@@ -1,19 +1,17 @@
-public class Mahasiswa {
-    private String nama;
-    private String nim;
-
-    public Mahasiswa(){
-        this.nama = "Muhammad Ibrahim Al Ayubi";
-        this.nim = "202410370110123";
+public class Mahasiswa extends User{
+    public Mahasiswa() {
+        super("Muhammad Ibrahim Al Ayubi","202410370110123");
     }
 
-    public boolean login(String inputNama,String inputNim){
-        return inputNama.equalsIgnoreCase(nama) && inputNim.equalsIgnoreCase(nim);
+    @Override
+    public boolean login(String inputNama, String inputNim) {
+        return getNama().equalsIgnoreCase(inputNama)&&getNim().equalsIgnoreCase(inputNim);
     }
 
-    public void displayInfo(){
-        System.out.println("Login Mahasiswa Berhasil.");
-        System.out.println("Nama: "+nama);
-        System.out.println("NIM: "+nim);
+    @Override
+    public void displayInfo() {
+        System.out.println("Login Mahasiswa Berhasil");
+        System.out.println("Nama: "+getNama());
+        System.out.println("NIM: "+getNim());
     }
 }
