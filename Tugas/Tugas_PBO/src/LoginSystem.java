@@ -2,6 +2,8 @@ import  java.util.Scanner;
 class LoginSystem {
     public static void main(String[] args) {
         Scanner objinput = new Scanner(System.in);
+        Admin admin = new Admin();
+        Mahasiswa mahasiswa = new Mahasiswa();
 
         System.out.println("Masukkan pilihan login: ");
         System.out.println("1. Admin");
@@ -11,32 +13,29 @@ class LoginSystem {
         int pilihan = objinput.nextInt();
         objinput.nextLine();
 
-        User user = null;
 
         switch (pilihan){
             case 1:
-                user = new Admin();
                 System.out.println("Masukkan username: ");
                 String username = objinput.nextLine();
                 System.out.println("Masukkan password: ");
                 String password = objinput.nextLine();
 
-                if(user.login(username, password)){
-                    user.displayInfo();
+                if(admin.login(username, password)){
+                    admin.displayInfo();
                 }else{
                     System.out.println("Login gagal! username atau Password salah");
                 }
                 break;
 
             case 2:
-                user = new Mahasiswa();
                 System.out.println("Masukkan nama: ");
                 String nama = objinput.nextLine();
                 System.out.println("Masukkan NIM: ");
                 String nim = objinput.nextLine();
 
-                if(user.login(nama,nim)){
-                    user.displayInfo();
+                if(mahasiswa.login(nama,nim)){
+                    mahasiswa.displayInfo();
                 }else{
                     System.out.println("Login gagal! Nama atau NIM salah!");
                 }
