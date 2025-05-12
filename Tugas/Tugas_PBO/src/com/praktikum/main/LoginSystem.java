@@ -1,3 +1,9 @@
+package com.praktikum.main;
+
+import com.praktikum.users.Admin;
+import com.praktikum.users.Mahasiswa;
+import com.praktikum.users.User;
+
 import  java.util.Scanner;
 class LoginSystem {
     public static void main(String[] args) {
@@ -23,6 +29,8 @@ class LoginSystem {
 
                 if(admin.login(username, password)){
                     admin.displayInfo();
+                    User user = new Admin();
+                    user.displayAppMenu();
                 }else{
                     System.out.println("Login gagal! username atau Password salah");
                 }
@@ -36,6 +44,8 @@ class LoginSystem {
 
                 if(mahasiswa.login(nama,nim)){
                     mahasiswa.displayInfo();
+                    User user = new Mahasiswa();
+                    user.displayAppMenu();
                 }else{
                     System.out.println("Login gagal! Nama atau NIM salah!");
                 }
