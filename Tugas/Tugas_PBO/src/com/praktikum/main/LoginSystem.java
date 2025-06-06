@@ -1,60 +1,80 @@
 package com.praktikum.main;
 
+import com.praktikum.data.Items;
 import com.praktikum.users.Admin;
 import com.praktikum.users.Mahasiswa;
 import com.praktikum.users.User;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import  java.util.Scanner;
-class LoginSystem {
+public class LoginSystem {
+    public static ArrayList<User> userList = new ArrayList<>();
+    public static ArrayList<Items> reportedItems = new ArrayList<>();
+    static{
+        userList.add(new Admin("Admin123", "Password123", "ayub", "123"));
+        userList.add(new Mahasiswa("Muhammad Ibrahim Al Ayubi", "202410370110123"));
+    }
     public static void main(String[] args) {
         Scanner objinput = new Scanner(System.in);
-        Admin admin = new Admin();
-        Mahasiswa mahasiswa = new Mahasiswa();
 
-        System.out.println("Masukkan pilihan login: ");
-        System.out.println("1. Admin");
-        System.out.println("2. Mahasiswa");
-        System.out.println("Masukkan pilihan (1/2): ");
+        while (true) {
+            System.out.println("Masukkan pilihan login: ");
+            System.out.println("1. Admin");
+            System.out.println("2. Mahasiswa");
+            System.out.println("0. Keluar");
+            System.out.print("Masukkan pilihan (1/2/0): ");
 
-        int pilihan = objinput.nextInt();
-        objinput.nextLine();
-
-
-        switch (pilihan){
-            case 1:
-                System.out.println("Masukkan username: ");
-                String username = objinput.nextLine();
-                System.out.println("Masukkan password: ");
-                String password = objinput.nextLine();
-
-                if(admin.login(username, password)){
-                    admin.displayInfo();
-                    User user = new Admin();
-                    user.displayAppMenu();
-                }else{
-                    System.out.println("Login gagal! username atau Password salah");
-                }
-                break;
-
-            case 2:
-                System.out.println("Masukkan nama: ");
-                String nama = objinput.nextLine();
-                System.out.println("Masukkan NIM: ");
-                String nim = objinput.nextLine();
-
-                if(mahasiswa.login(nama,nim)){
-                    mahasiswa.displayInfo();
-                    User user = new Mahasiswa();
-                    user.displayAppMenu();
-                }else{
-                    System.out.println("Login gagal! Nama atau NIM salah!");
-                }
-                break;
-
-            default:
-                System.out.println("Pilihan tidak valid");
+            int pilihan;
+            try {
+                pilihan = objinput.nextInt();
+                objinput.nextLine();
+            }catch (InputMismatchException e){
+                System.out.println("input harus berupa angka!");
+                objinput.nextLine();
+                continue;
+            }
+            User logged = null;
+            switch (pilihan){
+                case 1:
+                    System.out.print("Masukan username: ");
+                    String username = objinput.nextLine();
+                    System.out.print("Masukan password: ");
+                    String password = objinput.nextLine();
+                    for (User user : userList){
+                        if(user instanceof Admin && user.login(username,password)){
+                            logged = user;
+                            break;
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.print("Masukkan nama: ");
+                    String nama = objinput.nextLine();
+                    System.out.print("Masukkan NIM: ");
+                    String nim = objinput.nextLine();
+                    for (User user : userList){
+                        if(user instanceof Mahasiswa && user.login(nama,nim)){
+                            logged = user;
+                            break;
+                        }
+                    }
+                    break;
+                case 0:
+                    System.out.println("Terimakasih telah mengunakan program kami");
+                    objinput.close();
+                    return;
+                default:
+                    System.out.println("Input tidak valid");
+            }
+            if(logged!=null){
+                logged.displayInfo();
+                logged.displayAppMenu();
+            }else  {
+                System.out.println("Login gagal cek kembali kredensial");
+            }
         }
-
-        objinput.close();
     }
 }
+
+
